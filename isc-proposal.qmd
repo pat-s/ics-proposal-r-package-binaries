@@ -1,10 +1,10 @@
 ---
-title: "Proposal Title"
+title: "R package binaries for Linux - Community Edition"
 author: 
-  - name: Annie Easley
-    orcid: 5555-5555-5555-5555
+  - name: Dr. Patrick Schratz
+    orcid: 0000-0003-0748-6624
     affiliations:
-      - "Lewis Research Center, National Aeronautics and Space Administration"
+      - "devXY GmbH"
     
 date: today
 date-format: iso

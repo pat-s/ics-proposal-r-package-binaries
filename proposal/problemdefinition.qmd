@@ -4,16 +4,73 @@ bibliography: references.bib
 
 # The Problem
 
-```{=html}
-<!-- 
-Outlining the issue / weak point / problem to be solved by this proposal. This should be a compelling section that sets the reader up for the next section - the proposed solution!
+## Linux binary packages
 
-It is important to cover:
+Binary Packages are essential for efficient workflows in R.
+Currently, CRAN is building and publishing binary packages for Windows and macOS. Linux binaries are missing, even though most (corporate) team environments run on Linux. In addition, the share of private R users using Linux as their host OS becomes larger every year.
 
- - [ ] What the problem is
- - [ ] Who it affects
- - [ ] Have there been previous attempts to resolve the problem
- - [ ] Why it should be tackled
--->
-```
-An example in-text citation [@wickham2016].
+Without binaries for Linux, package installations can take many minutes, sometimes even up to hours (e.g. when packages like {duckdb} or {Rfast} are involved). 
+To my knowledge (spanning mostly from community discussions), CRAN does not seem to have plans building binary packages for Linux. Especially after Posit launched their public Package Manager Service in 2020, providing Linux binaries for different distributions on the `x86_64` architecture, the motivation to do so might been reduced even further.
+
+## Public Posit Package Manager
+
+The [PPM](https://packagemanager.posit.co) has been a valuable resource for the R community since its launch.
+However, it has the following drawbacks:
+
+- The build process is untransparent / not public
+- The download speed is at best “acceptable”
+- The usage of the binaries comes with a TOS agreement. This can be problematic for specific use cases and poses a general risk to users, as it is often overlooked and might cause (costly) architecture adjustments once it is realized
+- Binaries for the arm64 architecture are missing
+
+## Alpine Linux
+
+All of the solutions above are missing out on [Alpine Linux](https://www.alpinelinux.org/).
+This Linux distribution is the de-factor standard for any CI/CD builds, whether running containerized or not, due to the small size of its OS and related system libraries. 
+
+The distribution is using a different C library (MUSL) instead of the canonical default GLIBC. This leads to issues for some packages wrapping C-code and authors needs to adjust for it.
+Not many do, unless they have a focus on Alpine, also because CRAN does not perform any MUSL-based checks for package submissions.
+
+In a recent correspondence with the CRAN team in January 2025, adding such checks are also not of interest for the CRAN team right now.
+The lack of Alpine R package binaries makes R a second-class citizen in the modern CI/CD world.
+
+## Architecture: arm64
+
+R package binaries for the `arm64` architecture are missing completely right now. 
+Even Posit has not done any efforts yet in building for this architecture, even though they stated that they want to start doing so in 2025 (in a correspondence from 2024).
+
+The `arm64` architecture has been becoming increasingly popular in recent years and is well supported on many cloud providers.
+Servers with this architecture provide cost-saving opportunities compared to their `x86` equivalents and also often outperform them in CPU benchmarks. 
+
+The lack of R package binaries (and interpreter binaries) makes R a second-class citizen in this space.
+
+## R Universe
+
+R Universe, an existing R-consortium funded project, is a first step to an alternative packaging system for the R community.
+
+However, as of today, R universe only builds binary packages for the latest LTS release of Ubuntu (filtered on Linux in general). 
+Packages for other architectures, distributions or architectures are missing.
+
+In addition, the build process heavily relies on GitHub Actions.
+While this might seem a positive aspect for some on the first look, I'd argue that it is effectively a downside for the following reasons:
+
+- GitHub's public runners are rather slow compared to evenly-sized cloud VMs
+- GitHubs default free build minutes are quite limited and the costs for adding additonal ones are quite high, compared with the alternative of providing private runners
+- GitHub did not have arm64 support until recently, and the support itself is in an relatively early stage with limited build capacities
+
+All of this could be done much more efficiently, both in terms of costs and resource efficiency.
+
+Another lacking point is that the engine behind the package builds, its infrastructure and build process is somewhat abstract.
+Yes, every package has its own repository executing the package builds in the public on GitHub Actions, yet the underlying code and process is unclear and not easily visible.
+Neither can uses re-use the logic to build and publish binaries themselves, they fully need to rely on the magic done by R Universe in the background.
+
+## Creating custom repositories
+
+All of the above do not help if teams want to create and maintain their own private repository containing a selected suite of (internal) R packages.
+These days, some tools exist that allow achieving this: [{minicran}](https://github.com/andrie/miniCRAN) and [drat](https://cran.r-project.org/web/packages/drat/index.html).
+However, these do not provide the option to (easily) build binary packages or manage the packages in S3 buckets.
+
+Ideally, it should be as easy as running a single function (or two) which inits the remote storage, builds packages from a local source or remote URL and returns the final repository URL for download in the end.
+
+The motivation behind such a solutin has also increased in the past year after Posit has drastically increased the pricing for its Package Manager product.
+Before, the product was reasonably priced and providing a convenient way to set up and manage internal R repositories. 
+After the price change, the application became unaffordable for many companies considering its scope, leading many teams to reconsider their choice of tools (a conclusion drawn from my personal experience in daily consulting practice).

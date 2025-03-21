@@ -1,20 +1,35 @@
 # The proposal
-<!--
-This is where the proposal should be outlined. 
--->
 
-## Overview
-<!--
-At a high-level address what your proposal is and how it will address the problem identified. Highlight any benefits to the R Community that follow from solving the problem. This should be your most compelling section.
--->
+Establish an **open-source** build system for R package binaries.
+Not only the source code should be public, but also the actual build processes (running in CI) should be publicly accesible.
 
-## Detail
-<!--
-Go into more detail about the specifics of the project and it delivers against the problem.
+The build system should be able to build packages for (common) Linux distributions and multiple architectures (for the start, `x86` and `arm64`, `riscv64` in the forseeable future).
+As R is the best tool for building its own packages, thanks to projects like {pak}, {cranlike}, {pkgdepends}, {cranberries} and others, the core part will be done in R itself.
+This also allows for possible contributions from the community itself, as the codebase should be familiar to them.
 
-Depending on project type the detail section should include:
+The engine should be written in a generic way, so that it can be used to build binaries from any R package source, being it a local or remote one.
+It should allow publishing to custom repositories, so that the community has a “go-to” tool for building and creating their own private repositories.
 
- - [ ] Minimum Viable Product
- - [ ] Architecture
- - [ ] Assumptions
--->
+Users should optionally be allowed to store the build metadata in a database (SQLite, PG, MariaDB), allowing for optional statistical analysis and other post-hoc analysis.
+
+The main storage for the binaries itself is S3 (as the only option for now).
+S3 allows for flexible data storage and replication while keeping costs small.
+Currently, no existing build tools allow using S3 directly, i.e. binaries must be stored on hard disks. Doing so increases storage costs by many factors and becomes a problem for medium-large sized repositories.
+
+Storing packages in S3 allows for direct distribution of such to users.
+Yet often enough, the raw S3 URLs are not pretty enough to use them in production environments.
+A simple CNAME entry can often help to resolve this and allows for a simple, custom-domain access for users.
+Optionally, S3 can serve as the source for a Content Delivery Network (CDN), which allows for accelerated download speed.
+
+As of today, the current system in place provides binaries for 
+
+- Ubuntu 24.04
+- Ubuntu 22.04
+- RHEL8
+- RHEL9
+- Alpine 3.20
+- Alpine 3.21
+
+for both `x86_64` and `arm64` architectures.
+The download speed is 5-10x faster than when downloading binaries from the Posit Package Manager.
+The build process is fully transparent (<https://ci.devxy.io/repos/7>).

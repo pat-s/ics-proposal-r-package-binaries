@@ -1,30 +1,26 @@
 # Success
-<!-- 
-Projects should have a definition of done that is measurable, and a thorough understanding going in of what the risks are to delivery 
--->
 
 ## Definition of done
-<!-- 
-What does success look like? 
--->
+
+1. A running, public build service providing R package binaries for Linux to the community which has caused minimal interruptions for users across a timespan covering multiple OS updates.
+1. A framework/engine for building binary packages, written in R, with extensive documentation around its usage and optional extensions (e.g. metadata database), allowing users to easily host and use their own package repository.
 
 ## Measuring success
-<!-- 
-How will we know when success is achieved, what markers can we use along the way 
--->
+
+- Download counts
+- Tracking missing/corrupted packages in the public service
+- Gathering user feedback on the overall process of creating custom user repositories
 
 ## Future work
-<!-- 
-How could this be extended / developed in the future by yourself and/or the community in general?
--->
+
+Community contribution should be encouraged and can help to sustain for the project for a long time.
+Overall, it would be super cool to have an open, free and professional tool which allows building and maintaining custom user repositories while also providing a highly performant binary package repository of CRAN packages in the first place.
 
 ## Key risks
-<!-- 
-What sort of things could come up that can delay or break the project?
 
- - [ ] People
- - [ ] Processes
- - [ ] Tooling & Technology
- - [ ] Costs
+The following possible risks are associated with the project:
 
--->
+- Overall acceptance in the community and trust of the service and build process
+- Competition from large players in the field (e.g. Posit) offering proprietary software
+- Bus-factor: multiple persons must have access to all required components of the infrastructure to avoid a single-person bottleneck
+- Lack of (long-term coverage) of the costs of the running build service (especially the bandwith costs in case there will be a large community adaption). 

@@ -1,34 +1,53 @@
 # Requirements
-<!-- 
-An idea of what is required to make the project actually happen
--->
+
+## General
+
+- Support for continuous development of the code engine
+- Cost coverage for the public running service building CRAN packages for various distributions and architectures
 
 ## People
-<!--
-Who needs to be involved, what's the proposed structure, what will it take to get their involvement?
--->
 
-## Processes
-<!-- 
-What processes need to be put in place e.g. codes of conduct, regular ISC meetings, handover to the community at large?
--->
+Additional people which ensure an upkeep of the public package build service and the underlying servers.
+
+The project can be run by a single person technically, more people would be helpful to improve the project code and robustify the service maintenance.
 
 ## Tools & Tech
-<!--
-What is going to be needed to deliver this project? 
 
-Will cloud computing be used - if yes are there are necessary components that will be deciding factors between providers?
+- For the public CRAN build service, a cloud infrastructure (already existing) which provides native `x86_64` and `arm64` runners that are able to natively build the respective packages.
+The servers need decent CPU power to minimize build times and being able to process all existing packages, in scenarios of major OS version updates, in a reasonable time.
 
-Are there tools or tech that don't exist that will be produced to facilitate the project?
--->
+- A (professionally) managed database storing the build metadata (already in place).
+
+- S3 storage in the cloud (currently using Hetzner, 1TB/m = 5 EUR).
+
+- UI frontend showing available packages (optional).
+  Currently, a self-built Shiny App Dashboard is in use (<https://app.devxy.io/app/r-package-binaries-dashboard>)
+
+![High level architecture diagram](proposal/img/architecture.drawio.svg)
 
 ## Funding
-<!-- 
-[TO DO] THE GUIDANCE IS PRETTY UNCLEAR, ESP IN LIGHT OF GABOR'S PROPOSAL VS AWARD SIZE
 
--->
+There are two main types of funding:
+
+1. General maintenance and improvement of the "engine" and its related documentation
+1. Coverage of cloud costs for the running service providing binaries for CRAN packages 
+
+For (1), I do not know if there are hard-coded policies in place for human workforce costs per project/hour. It would surely be great to have financial support for this, but overall, (2) is more important in my opinion.
+
+For (2), I'll outline a cloud cost overview which will be able to efficiently provide the technical resources to run the overall CRAN build service for the forseeable future:
+
+| Name                                             | ~ Cost/month | ~ Costs / year | Notes                                                                                   |
+|--------------------------------------------------|----------------------|--------------|----------------------------------------------------------------------------------------|
+| `x86_64` Server (8 cores, 16 threads, 64 GB RAM) | 54 Euro              | 648 Euro     | Used to build `x86_64` binaries, bare-metal root server                                |
+| x2 `arm64` Server (16 cores, 32 GB RAM)          | 52 Euro              | 624 Euro     | Used to build `arm64` binaries, shared Cloud Server, price for two units               |
+| Database Servers (HA)                            | 12 Euro              | 144 Euro     | HA Database for build metadata                                                         |
+| S3 storage costs                                 | 15 Euro              | 180 Euro     | Costs for 3 TB, current storage is at 2.14 TB                                          |
+| CDN costs                                        | ?? Euro              | ?? Euro      | CDN bandwith/transfer costs. 10$/1 TB bandwith, + local storage zones around the world |
+
+While the core setup (servers, S3, DB) should stay quite static at ~ 150 / month (1800 / year), the bandwith costs for fast downloads around the world is dynamic.
+If the service is picked up by the community on a large scale, costs of multiple hundreds per month could occur, when with a cost-efficient CDN provider.
 
 ## Summary
-<!--
-A summary of the requirements that contextualises the costs
--->
+
+The project would benefit from workforce costs for continous development of the core engine and coverage of the running cloud costs.
+Increasing the bus-factor for people with access to the core components of the infrastructure would make the project more robust against failures or human absences.

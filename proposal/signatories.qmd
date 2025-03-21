@@ -1,22 +1,26 @@
 # Signatories
-<!-- 
-This section provides the ISC with a view of the support received from the community for a proposal. Acceptance isn't predicated on popularity but community acceptance is important.  Willingness to accept outside input is also a good marker for project delivery. 
 
-An optional section would be for R-Core signatories where changes to R are proposed.
--->
+Josiah Perry has acknowledged the usefulness lately and even [donated for it](buymeacoffee.com/patrickschratz/c/12848930).
+
+Sharing the project in the `rstats` subreddit [resulted in some very positive reactions](https://www.reddit.com/r/rstats/comments/1iq7isu/package_binaries_for_arm64_and_alpine/).
+
+As my social media accounts are not having the greatest reach and Twitter/X is basically dead, the reactions there were limited.
+
+A [blog post](https://www.devxy.io/blog/cran-r-package-binaries-launch/) shared on my website has been shared in rweekly in December 2024.
+
+Last, a variety of business clients of mine have shared their enthuisiams with me personally, hoping to see a positive development of the overall project idea.
 
 ## Project team
-<!-- 
-Who are the people responsible for actually delivering the project if the proposal gets accepted and are already signed up and rearing to go?
--->
+
+Patrick Schratz, CEO devXY. 
+
+More than 10 years of R experience, PhD in applied machine learning, devOps Engineer. Architecting and implementing R-based data science environemnts for corporate teams. Deep understanding of cloud architectures, UNIX system administration and how to use R in the most performant ways.
 
 ## Contributors
-<!-- 
-Who are the people who have actively helped with this proposal but won't necessarily be on the core project team later?
--->
+
+None right now.
 
 ## Consulted
-<!-- 
-Who has been given the opportunity to provide feedback on the proposal? This should include any R Consortium & ISC members who the proposal has been discussed with.
--->
+
+None so far.
 
