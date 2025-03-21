@@ -1,6 +1,6 @@
 # Signatories
 
-Josiah Perry has acknowledged the project idea and even [donated for it](buymeacoffee.com/patrickschratz/c/12848930).
+Josiah Perry (Infrastructure Steering Committee member) has acknowledged the project idea and even [donated for it](buymeacoffee.com/patrickschratz/c/12848930).
 
 Sharing the project in the `rstats` subreddit resulted [in some very positive reactions](https://www.reddit.com/r/rstats/comments/1iq7isu/package_binaries_for_arm64_and_alpine/).
 (As my social media accounts are not having the greatest reach and Twitter/X is basically dead, the reactions there were limited.)
