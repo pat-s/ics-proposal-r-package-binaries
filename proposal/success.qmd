@@ -13,14 +13,14 @@
 
 ## Future work
 
-Community contribution should be encouraged and can help to sustain for the project for a long time.
-Overall, it would be super cool to have an open, free and professional tool which allows building and maintaining custom user repositories while also providing a highly performant binary package repository of CRAN packages in the first place.
+Encouraging community contributions could play a key role in sustaining the project over the long term.
+Ultimately, it would be fantastic to have an open, free, and professional-grade tool that not only supports the creation and maintenance of custom user repositories, but also delivers a high-performance binary package repository for CRAN packages out of the box.
 
 ## Key risks
 
-The following possible risks are associated with the project:
+The project faces several potential risks:
 
-- Overall acceptance in the community and trust of the service and build process
-- Competition from large players in the field (e.g. Posit) offering proprietary software
-- Bus-factor: multiple persons must have access to all required components of the infrastructure to avoid a single-person bottleneck
-- Lack of (long-term coverage) of the costs of the running build service (especially the bandwith costs in case there will be a large community adaption). 
+- Gaining broad acceptance within the community and building trust in the service and its build process
+- Competition from established players in the space (e.g., Posit) offering proprietary alternatives
+- Bus factor: ensuring that multiple individuals have access to all critical components of the infrastructure to prevent reliance on a single person
+- Uncertainty around long-term funding to cover operational costs—particularly bandwidth expenses, which could become significant if community adoption grows substantially

@@ -1,13 +1,13 @@
 # The proposal
 
-Establish an **open-source** build system for R package binaries.
-Not only the source code should be public, but also the actual build processes (running in CI) should be publicly accesible.
+Establish a R-based, **open-source** build system for R package binaries.
+Not only the source code of the underlying code engine should be public, but also the actual build processes (running in CI) of the publicly running service building CRAN package binaries.
 
-The build system should be able to build packages for (common) Linux distributions and multiple architectures (for the start, `x86` and `arm64`, `riscv64` in the forseeable future).
+The build system should be able to build packages for (common) Linux distributions and multiple architectures (for the start `x86` and `arm64`, `riscv64` in the forseeable future).
 As R is the best tool for building its own packages, thanks to projects like {pak}, {cranlike}, {pkgdepends}, {cranberries} and others, the core part will be done in R itself.
 This also allows for possible contributions from the community itself, as the codebase should be familiar to them.
 
-The engine should be written in a generic way, so that it can be used to build binaries from any R package source, being it a local or remote one.
+The engine should be written in a generic way, so that it can be used to build binaries from any R package source, being it a local (on disk) or remote (URL) one.
 It should allow publishing to custom repositories, so that the community has a “go-to” tool for building and creating their own private repositories.
 
 Users should optionally be allowed to store the build metadata in a database (SQLite, PG, MariaDB), allowing for optional statistical analysis and other post-hoc analysis.
