@@ -4,6 +4,10 @@ on:
 
 name: publish-proposal
 
+permissions: 
+    contents: write
+    pages: write
+
 jobs:
   render-proposal:
     runs-on: ubuntu-latest
